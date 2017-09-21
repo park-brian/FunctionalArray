@@ -1,5 +1,5 @@
 {
-    "name": "park-brian/FunctionalArray",
+    "name": "park-brian/functional-array",
     "type": "library",
     "description" : "A functional wrapper for arrays",
     "license": "MIT",
