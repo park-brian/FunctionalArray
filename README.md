@@ -16,7 +16,7 @@ composer require park-brian/functional-array
 
 use FunctionalArray\FunctionalArray as FnArray;
 
-$sum = FnArray(create(range(1, 10)))
+$sum = FnArray::create(range(1, 10))
   ->map     (function($value) { return $value * 2;  })
   ->filter  (function($value) { return $value > 10; })
   ->reduce  (function($acc = 0, $value) { return $acc + $value; });
