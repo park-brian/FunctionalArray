@@ -1,11 +1,12 @@
 language: php
 
-sudo: false
-
 php: 7.1
 
+sudo: false
+
 cache:
-  directories: $HOME/.composer/cache
+  directories:
+    - $HOME/.composer/cache
 
 install:
   - composer install
