@@ -1,6 +1,9 @@
 <?php
 
-class MapTest extends \PHPUnit_Framework_TestCase {
+use FunctionalArray;
+use PHPUnit\Framework\TestCase;
+
+class MapTest extends TestCase {
 
     public function testMapNumeric() {
         $factor = 2;
