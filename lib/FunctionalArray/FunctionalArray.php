@@ -13,6 +13,8 @@
  *   print_r($val);
  */
 
+namespace FunctionalArray;
+
 class FunctionalArray implements ArrayAccess, Iterator, JsonSerializable {
   private $array = [];
   private $keys = [];

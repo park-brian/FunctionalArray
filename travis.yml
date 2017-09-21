@@ -4,5 +4,4 @@ php:
   - 7.0
   - 7.1
   - hhvm
-
-script: phpunit -c phpunit.xml
+script: phpunit
