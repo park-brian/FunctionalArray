@@ -4,6 +4,9 @@
 
 Functional PHP arrays
 
+## Requirements
+ - php 5.6+
+
 ## Getting Started
 
 ```bash
