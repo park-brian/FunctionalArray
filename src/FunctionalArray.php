@@ -6,7 +6,7 @@ class FunctionalArray implements \ArrayAccess, \Iterator, \JsonSerializable {
   private $array = [];
   private $keys = [];
   private $position = null;
-  
+
   public function __construct($array = []) {
     $this->array = $array;
     $this->keys = array_keys($array);
@@ -14,32 +14,33 @@ class FunctionalArray implements \ArrayAccess, \Iterator, \JsonSerializable {
         ? $this->keys[0]
         : null;
   }
-  
-  public function map($callback) {
-    $new = [];
-    foreach($this->array as $key => $value) {
-      $new[$key] = $callback($value, $key);
-    }
-    return new FunctionalArray($new);
+
+  public static function create($array) {
+    return new self($array);
   }
-  
+
+  public function map($callback) {
+    $accumulator = [];
+    foreach($this->array as $key => $value)
+      $accumulator[$key] = $callback($value, $key);
+    return new self($accumulator);
+  }
+
   public function filter($callback) {
     $result = array_filter($this->array, $callback, ARRAY_FILTER_USE_BOTH);
-    return new FunctionalArray(
-      self::has_string_keys($this->array)
+    return new self(
+      count(array_filter($this->keys, 'is_string')) > 0
         ? $result
         : array_values($result)
     );
   }
-  
+
   public function reduce($callback, $initialValue = NULL) {
     $accumulator = $initialValue;
-    foreach($this->array as $key => $value) {
+    foreach($this->array as $key => $value)
       $accumulator = $callback($accumulator, $value, $key);
-    }
-
     return is_array($accumulator)
-      ? new FunctionalArray($accumulator)
+      ? new self($accumulator)
       : $accumulator;
   }
 
@@ -50,15 +51,15 @@ class FunctionalArray implements \ArrayAccess, \Iterator, \JsonSerializable {
   public function offsetExists($offset) {
     return array_key_exists($offset, $this->array);
   }
-  
+
   public function offsetGet($offset) {
     return $this->array[$offset];
   }
-  
+
   public function offsetSet($offset, $value) {
     $this->array[$offset] = $value;
   }
-  
+
   public function offsetUnset($offset) {
     unset($this->array[$offset]);
   }
@@ -82,18 +83,14 @@ class FunctionalArray implements \ArrayAccess, \Iterator, \JsonSerializable {
   }
 
   public function valid() {
-    return 
-      isset($this->keys[$this->position]) && 
+    return
+      isset($this->keys[$this->position]) &&
       isset($this->array[
-        $this->keys[$this->position]      
+        $this->keys[$this->position]
       ]);
   }
 
   public function jsonSerialize() {
     return json_encode($this->array);
-  }
-
-  private static function has_string_keys(array $array) {
-    return count(array_filter(array_keys($array), 'is_string')) > 0;
   }
 }

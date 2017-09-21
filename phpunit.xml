@@ -32,5 +32,5 @@
         <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
         <log type="coverage-text" target="build/coverage.txt"/>
         <log type="coverage-clover" target="build/clover.xml"/>
-    </logging>    
+    </logging>
 </phpunit>
