@@ -1,21 +1,8 @@
 <?php
 
-/**
- * A simple class that wraps a PHP array in a functional way.
- *
- * Example Usage:
- *
- *   $val = (new FunctionalArray(range(1, 10)))
- *     ->map    (function($value)      { return $value * 1;   })
- *     ->filter (function($value)      { return $value > 5;   })
- *     ->reduce (function($acc, $curr) { return $acc + $curr; }, 0);
- *
- *   print_r($val);
- */
-
 namespace FunctionalArray;
 
-class FunctionalArray implements ArrayAccess, Iterator, JsonSerializable {
+class FunctionalArray implements \ArrayAccess, \Iterator, \JsonSerializable {
   private $array = [];
   private $keys = [];
   private $position = null;

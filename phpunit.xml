@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="true"
-         backupStaticAttributes="true"
-         bootstrap="./vendor/autoload.php"
+
+<phpunit bootstrap="vendor/autoload.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
          colors="true"
+         verbose="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         forceCoversAnnotation="false"
-         mapTestClassNameToCoveredClassName="false"
          processIsolation="false"
-         stopOnError="false"
-         stopOnFailure="false"
-         stopOnIncomplete="false"
-         stopOnSkipped="false"
-         testSuiteLoaderFile="vendor/phpunit/phpunit/src/Runner/StandardTestSuiteLoader.php"
-         strict="true"
-         verbose="false">
+         stopOnFailure="false">
+
     <testsuites>
-        <testsuite name="Unit">
-            <directory>./test/</directory>
+        <testsuite name="FunctionalArray tests">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
+
     <filter>
         <whitelist>
-            <directory suffix=".php">./lib/</directory>
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix="include.php">src</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
